@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Для рекрута</title>
+</head>
+<body>
+<h1>Выберите планету</h1>
+{% for planet in planet_list %}
+    <a href="{% url 'recruiting:recruit_data' planet.id %}">{{ planet.planet_name }}</a> <br>
+{% endfor %}
+
+
+</body>
+</html>

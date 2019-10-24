@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1> Ситх: {{ sith.sith_name }}</h1>
+<h2> Планета, на которой проходит обучение: {{ sith.teaching_planet }}</h2>
+<h3> Список рекрутов, на этой планете</h3>
+
+
+{% for recruit, test_results in recruit_results.items %}
+    Имя рекрута: {{ recruit.recruit_name }} <br>
+    {% for question, answer in test_results.items %}
+        {{ question.question }}   {{ answer.answer }} <br>
+    {% endfor %}
+<br>
+{% empty %}
+    Нет доступных рекрутов на этой планете
+{% endfor %}
+
+{% if recruit_results and sith.can_take_student %}
+Кого возьмем? <br>
+<form action="{% url 'recruiting:accept_recruit' sith.id %}" method="post">
+        {% csrf_token %}
+    {% for recruit in recruit_results %}
+        <p><input type="radio" name="recruit" value={{recruit.id}}> {{ recruit.recruit_name }}</p>
+    {% endfor %}
+
+    <button type="submit">Принять рекрута</button>
+</form>
+{% endif %}
+<br>
+{% if not sith.can_take_student %}
+    Ты не можешь принимать рекрутов, ты достиг максимального количества = {{ sith.max_number_of_recruits }} рекрута.
+{% endif %}
+
+</body>
+</html>

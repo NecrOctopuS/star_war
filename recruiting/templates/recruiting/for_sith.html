@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Для ситха</title>
+</head>
+<body>
+{% for sith in siths %}
+    <a href="{% url 'recruiting:sith_data' sith.id %}">{{ sith.sith_name }}</a>  Количество Рук Тени {{ sith.student.count }} <br>
+{% endfor %}
+<br>
+
+Ситхи у которых более 1-ой Руки Тени <br>
+
+{% for sith in siths %}
+    {% if sith.student.count > 1 %}
+        <a href="{% url 'recruiting:sith_data' sith.id %}">{{ sith.sith_name }}</a>  Количество Рук Тени {{ sith.student.count }} <br>
+    {% endif %}
+{% endfor %}
+
+</body>
+</html>

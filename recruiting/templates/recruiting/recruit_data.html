@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>
+    {{ planet.planet_name }}
+</h2>
+
+
+<form action="{% url 'recruiting:create_recruit' planet.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" required placeholder="Ваше имя" name="name"><br>
+        <input type="number" required placeholder="Ваш возраст" name="age"><br>
+        <input type="email" required placeholder="Ваш email" name="email"><br>
+        <button type="submit">Подать заявку</button>
+</form>
+</body>
+</html>

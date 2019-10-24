@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>
+    {{ recruit.recruit_name }}
+</h1>
+<form action="{% url 'recruiting:send_test' recruit.id %}" method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            {{question.question}}<br>
+            <input type="radio" required name={{question.id}} value="True"> Да <br>
+            <input type="radio" required name={{question.id}} value="False"> Нет <br>
+
+        {% endfor %}
+        <button type="submit">Отправить ответы</button>
+
+
+</form>
+
+</body>
+</html>
